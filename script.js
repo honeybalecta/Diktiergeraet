@@ -1,5 +1,6 @@
 const timerElem = document.querySelector('.timer');
-const playBtn = document.getElementById('play');
+const playBtn = document.querySelector('.play-pause');
+const infoElem = document.querySelector('.info');
 
 let audio = new Audio('Leierkasten.wav');
 let currentInterval = null;
@@ -8,9 +9,10 @@ playBtn.addEventListener('click', function() {
     if (audio.paused) {
         audio.play();
         audio.onended = function() {
-            clearInterval(currentInterval);  // Stoppe den aktuellen Countdown
+            clearInterval(currentInterval);
             timerElem.textContent = "";
             setTimeout(function() {
+                infoElem.style.display = 'block';
                 timerElem.textContent = "67:00:00";
                 countdown(67*60*60);
             }, 1000);
@@ -32,5 +34,4 @@ function countdown(seconds) {
     }, 1000);
 }
 
-// Initial countdown
 countdown(2*60 + 17);
